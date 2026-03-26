@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: kikimora22/ascii-front:v1.0
+    image: kikimora22/ascii-frontend:v1.0
     container_name: ascii-front
     restart: always
     ports:
