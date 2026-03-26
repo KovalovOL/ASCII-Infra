@@ -1,0 +1,25 @@
+services:
+  frontend:
+    image: kikimora22/ascii-front:v1.0
+    container_name: ascii-front
+    restart: always
+    ports:
+      - "8000:80"
+  
+  backend:
+    image: kikimora22/ascii-back:v1.0
+    container_name: ascii-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/app.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
