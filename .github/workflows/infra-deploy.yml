@@ -1,0 +1,25 @@
+name: Infrastructure CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy changes to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            cd /opt/ASCII-Infra
+            
+            git pull origin main
+            
+            docker exec nginx nginx -t
+            docker compose up -d
+            docker exec nginx nginx -s reload
