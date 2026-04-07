@@ -7,7 +7,7 @@ services:
       - "8000:80"
   
   backend:
-    image: kikimora22/ascii-back:v1.0
+    image: kikimora22/ascii-back:latest
     container_name: ascii-backend
     restart: always
     ports:
