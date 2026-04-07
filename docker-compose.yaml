@@ -20,14 +20,6 @@ services:
       - "443:443"
     volumes:
       - ./nginx/app.conf:/etc/nginx/nginx.conf:ro
-      - ./certbot/conf:/etc/letsencrypt # Тут будуть лежати сертифікати
-      - ./certbot/www:/var/www/certbot  # Це папка для ACME challenge
     depends_on:
       - frontend
       - backend
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot

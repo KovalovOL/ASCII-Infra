@@ -20,12 +20,6 @@ jobs:
             
             git pull origin main
             
-            # 1. Перевіряємо конфіг за допомогою тимчасового контейнера
-            # Це безпечно: якщо в конфігу помилка, пайплайн зупиниться тут
-            docker compose run --rm nginx nginx -t
-            
-            # 2. Піднімаємо або оновлюємо сервіси
+            docker exec nginx nginx -t
             docker compose up -d
-            
-            # 3. На всякий випадок кажемо nginx перечитати конфіги (хоча up -d має це зробити)
-            docker compose exec -T nginx nginx -s reload
+            docker exec nginx nginx -s reload
